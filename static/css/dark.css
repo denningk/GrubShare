@@ -1,0 +1,114 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	background: radial-gradient(circle farthest-corner, #282828, black);
+}
+
+h1, h2, h3, h4, h5, h6, p, button, label {
+	font-family: "Lato", sans-serif;
+}
+
+#motto {
+	font-size: 36pt;
+	font-weight: 100;
+	line-height: 50pt;
+	color: white;
+	text-align: center;
+}
+
+.error_msg{
+	color: white;
+	text-align: center;
+}
+
+.mainContainer {
+	padding: 100px;
+	text-decoration: none;
+}
+
+#header {
+	line-height: 25pt;
+	text-align: center;
+	padding-top: 15pt;
+	font-size: 72pt;
+}
+
+#plan {
+	font-weight: 300;
+	color: #00FF99;
+	padding-bottom: 0;
+	text-decoration: none;
+}
+#it {
+	font-weight: 900;
+	color: #6666FF;
+	padding-bottom: 0;
+	text-decoration: none;
+}
+
+#btnHeader {
+	padding: 10pt;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#myBtn, #login {
+	background-color: #6666FF;
+	border-color: #6666FF;
+	color: #FFFFFF;
+}
+
+#search {
+	position: relative;
+	margin: 0% 33%;
+}
+.modal-dialog {
+	width: 60%;
+}
+.modal-body {
+	padding: 40px 50px;
+}
+.clearFloat {
+	clear: both;
+}
+.block {
+	display: block;
+}
+#event-row {
+	display: table-row;
+	width: 100%;
+	float: center; /*does this even work? lol*/
+}
+#sport-events {
+	display: table-cell;
+	width: 40%;
+	padding-right: 7%; 
+	position: relative;
+}
+#party-events {
+	display: table-cell;
+	width: 40%;
+	padding: 0% 7%;
+	position: relative;
+}
+#art-events {
+	display: table-cell;
+	width: 40%;
+	padding-left: 5%;
+	position: relative;
+}
+#time-row {
+	width: 100%;
+	display: table-row;
+}
+#pick-time {
+	display: table-cell;
+	width: 150px;
+}
+#location-div {
+	display: table-cell;
+	width: 100%;
+}

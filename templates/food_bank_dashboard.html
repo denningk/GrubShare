@@ -1,0 +1,9 @@
+<h1>Food Bank Dashboard Here</h1>
+{{locations}}
+{% if numRest > 1 %}
+<h2>Today, there are {{ numRest }} restaurants with surplus food in your area!</h2>
+{% elif numRest == 1 %}
+<h2>Today, there are {{ numRest }} restaurants with surplus food in your area!</h2>
+{% else %}
+<h2>Unfortunately, there are no restaurants donating today.</h2>
+{% endif %}

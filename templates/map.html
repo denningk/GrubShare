@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Simple Routing - RouteTask - 4.1</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="../../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+  <!-- Plugin CSS -->
+  <link href="../../static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+  <!-- Theme CSS -->
+  <link href="../../static/css/creative.css" rel="stylesheet">
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 85%;
+      width: 100%;
+    }
+    
+    #paneDiv {
+      position: absolute;
+      top: 10px;
+      left: 62px;
+      padding: 0 12px 0 12px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.1/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/Graphic",
+      "esri/layers/GraphicsLayer",
+      "esri/tasks/RouteTask",
+      "esri/tasks/support/RouteParameters",
+      "esri/tasks/support/FeatureSet",
+      "esri/symbols/SimpleMarkerSymbol",
+      "esri/symbols/SimpleLineSymbol",
+      "esri/Color",
+      "esri/core/urlUtils",
+      "dojo/on",
+      "dojo/domReady!",
+      "esri/geometry/Point",
+    ], function(
+      Map, MapView, Graphic, GraphicsLayer, RouteTask, RouteParameters,
+      FeatureSet, SimpleMarkerSymbol, SimpleLineSymbol, Color, urlUtils, on
+    ) {
+
+      // proxy the route requests to avoid prompt for log in
+      //urlUtils.addProxyRule({
+       // urlPrefix: "route.arcgis.com",
+        //proxyUrl: "/sproxy/"
+      //});
+
+      // Point the URL to a valid route service
+      var routeTask = new RouteTask({
+        url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World?token=9YcRZIsK0MosYMqf5hoRQoC5EgzXUij-QQqQy1W56VQLgx6nSBPYbTeNovaTjm8Vl_RsI8Vbc8RPH0yxBEuAVwY4xhw70llPe_H8x_h681MX-zou9Nu7VPnt1MqvcjcPRVPSKBmqa2EjAXSADThP2Q.."
+      });
+
+      // The stops and route result will be stored in this layer
+      var routeLyr = new GraphicsLayer();
+
+      // Setup the route parameters
+      var routeParams = new RouteParameters({
+        stops: new FeatureSet(),
+        outSpatialReference: { // autocasts as new SpatialReference()
+          wkid: 3857
+        }
+      });
+
+      // Define the symbology used to display the stops
+      var stopSymbol = new SimpleMarkerSymbol({
+        style: "circle",
+        size: 15,
+        outline: { // autocasts as new SimpleLineSymbol()
+          width: 2
+        }
+      });
+
+      // Define the symbology used to display the route
+      var routeSymbol = new SimpleLineSymbol({
+        color: [0, 0, 255, 0.5],
+        width: 3
+      });
+
+      var map = new Map({
+        basemap: "streets",
+        layers: [routeLyr] // Add the route layer to the map
+      });
+      var view = new MapView({
+        container: "viewDiv", // Reference to the scene div created in step 5
+        map: map, // Reference to the map object created before the scene
+        center: {{center}},
+        zoom: 14
+      });
+  
+      function addRestaurants(coordinates){
+      require(["esri/geometry/Point"], function(Point) {
+    	  coordinates.forEach(p => {var stop = new Graphic({
+              geometry: new Point(p[0],p[1]),
+              symbol: stopSymbol
+              
+            });
+    	  	console.log(p[0],p[1]);
+            routeLyr.add(stop);
+            // Execute the route task if 2 or more stops are input
+            routeParams.stops.features.push(stop);
+            if (routeParams.stops.features.length >= 2) {
+              routeTask.solve(routeParams).then(showRoute);
+            }
+    	  });
+    	  
+      });
+      }
+      var coordinates = [[-79.4414, 37.7858], [-79.4444,37.7853], [-79.4362, 37.7808], [-79.4375, 37.7795], [-79.4346, 37.7740]];
+      console.log({{locations}})
+      addRestaurants({{locations}});
+
+      // Adds the solved route to the map as a graphic
+      function showRoute(data) {
+        var routeResult = data.routeResults[0].route;
+        routeResult.symbol = routeSymbol;
+        routeLyr.add(routeResult);
+      }
+    });
+  </script>
+</head>
+<body style="background-image: url(../../static/img/formsBackground.png)">
+  <div id="viewDiv"></div>
+  <div id="paneDiv" style="margin: auto;">
+    <div>
+    	{% if numRest > 1 %}
+		<h2>Today, there are {{ numRest }} restaurants with surplus food in your area!</h2>
+		{% elif numRest == 1 %}
+		<h2>Today, there is {{ numRest }} restaurant with surplus food in your area!</h2>
+		{% else %}
+		<h2>Unfortunately, there are no restaurants donating today.</h2>
+		{% endif %}
+      <!--  <p>Click on the map to add stops to the route. The route from the last stop to
+        the newly added stop is calculated. If a stop is not reachable, it is removed
+        and the last valid point is set as the starting point.</p> -->
+    </div>
+  </div>
+  
+  <div class="container" style="margin: 50px auto;">
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="modal-body">
+		  {% for restaurant in restDict %}
+		  
+		  	<h4>{{ restaurant.2 }} is serving {{ restaurant.1 }} that can serve approximately {{ restaurant.0 }} people.</h4>
+		  
+		  {% endfor %}
+		</div>
+	</div>
+  </div>
+  
+  <!-- jQuery -->
+  <script src="../../static/vendor/jquery/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="../../static/vendor/scrollreveal/scrollreveal.min.js"></script>
+  <script src="../../static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Theme JavaScript -->
+    <script src="../../static/js/creative.min.js"></script>
+</body>
+</html>

@@ -2,8 +2,14 @@ from django.shortcuts import render
 from main.models import *
 from django.http import HttpResponseRedirect
 from datetime import datetime
-from forms import *
+from .forms import *
 from datetime import datetime
+
+def restaurant_form(request):
+    return render(request, 'restaurant_registration_form.html')
+
+def foodBank_form(request):
+    return render(request,"foodbank_registration_form.html")
 
 def register_restaurant(request):
     if request.method == 'POST':
@@ -20,8 +26,9 @@ def register_restaurant(request):
             last_name_contact = form.cleaned_data['contact_last_name']
             user_name = form.cleaned_data['username']
             pass_word = form.cleaned_data['password']
-            area = Area(city = city, zipcode = zipcode)
-            area.save()
+            if not Area.objects.all().filter(zipcode = zipcode).exists():
+                area = Area(city = city, zipcode = zipcode)
+                area.save()
             restaurant_registration = Restaurant(name = name,
                                                 street = street,
                                                 city = city,
@@ -55,8 +62,11 @@ def register_foodbank(request):
             last_name_contact = form.cleaned_data['contact_last_name']
             user_name = form.cleaned_data['username']
             pass_word = form.cleaned_data['password']
-            area = Area(city = city, zipcode = zipcode)
-            area.save()
+
+            if not Area.objects.all().filter(zipcode = zipcode).exists():
+                area = Area(city = city, zipcode = zipcode)
+                area.save()
+
             food_bank_registration = Food_Bank(name = name,
                                                 street = street,
                                                 city = city,
@@ -72,14 +82,16 @@ def register_foodbank(request):
             return HttpResponseRedirect('/')
     else:
         form = FoodBankForm()
-    return render(request, 'foodbank_form.html', {'form': form})
+    return render(request, 'foodbank_registration_form.html', {'form': form})
 
 def restuarant_donation(request):
     if request.method == 'POST':
         form = DonationForm(request.POST)
 
         if form.is_valid():
-            description = form.cleaned_data['donation_description']
+#             description = form.cleaned_data['donation_description']
+#             name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
             approx_servings = form.cleaned_data['approx_servings']
             date = datetime.now()
             restaurant_user_name = form.cleaned_data['username']
