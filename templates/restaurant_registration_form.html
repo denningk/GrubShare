@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Register</title>
+	<meta charset="ISO-8859-1">
+	<title>Register</title>
+	<!-- Bootstrap Core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Plugin CSS -->
+    <link href="../static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="../static/css/creative.css" rel="stylesheet">
 </head>
 <body>
-<h>Register</h>
-<form method="POST" action="/registration/restaurant/register">
-{%csrf_token%}
-{{form}}
-
-<button type="submit" class="btn btn-success btn-block" id="register_button">
-	<span class="glyphicon glyphicon-ok"></span> Register
-</button>
-</form>
+	<h>Register</h>
+	<form method="POST" action="/registration/restaurant/register">
+	{%csrf_token%}
+	
+	<div class="modal-body" style="background: #ff0000;">
+		{{form}}
+	</div>
+	
+	<button type="submit" class="btn btn-success btn-block" id="register_button">
+		<span class="glyphicon glyphicon-ok"></span> Register
+	</button>
+	</form>
 
 </body>
 </html>

@@ -6,7 +6,6 @@ Created on Oct 29, 2016
 from django import forms
 from django.core import validators
 
-
 class RestaurantRegistrationForm(forms.Form):
     
     name = forms.CharField(label="Name",widget=forms.TextInput(attrs={'placeholder': 'Name','class':'form-control', 'name':'name'}),max_length=200)
