@@ -21,7 +21,6 @@ def dashboard_map(request):
     for rest in donating_rests:
         data = gmaps.geocode(rest.street + ", " + rest.city + ", " + rest.state)        
         locations.append(list(parse_location(data)))
-    print locations
     return render(request, "map.html", {'locations':locations,'center':list(center)})
 
 

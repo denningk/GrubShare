@@ -30,10 +30,11 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">GrubShare</a>
+                -->
+                <a class="navbar-brand page-scroll" href="/">GrubShare</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling --
@@ -86,7 +87,7 @@
             <div class="alert alert-danger"> {{ food_error_msg }} </div>
             {% endif %}
             <form class="form-signin" method="POST" action="/food_bank_login/" style="width: 80%; margin: auto;">
-              {% csrf_token %}
+              	{% csrf_token %}
                 <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Username" required autofocus>
                 <input type="password" name="pass_word" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -106,8 +107,6 @@
         </div>
       </div>
     </div>
-
-    <script>$('#foodBank').modal('show')</script>
 
     <!-- For Restaurants -->
     <div class="modal fade" id="restaurant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -151,23 +150,26 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script>$('#restaurant').on('shown.bs.modal', function () {
-  $('#user_name').focus()
-})</script>
+	  $('#user_name').focus()
+		})
+	</script>
     <script>$('#foodBank').on('shown.bs.modal', function () {
-  $('#user_name').focus()
-})</script>
+	  $('#user_name').focus()
+		})
+	</script>
 
-  {% if food_error_msg %}
-  <script>
-  $('#foodBank').modal('show')
-  </script>
-  {% endif %}
-
-  {% if rest_error_msg %}
-  <script>
-  $('#restaurant').modal('show')
-  </script>
-  {% endif %}
+	  {% if food_error_msg %}
+	  <script>
+	  	$('#foodBank').modal('show')
+	  </script>
+	  {% endif %}
+	
+	  {% if rest_error_msg %}
+	  <script>
+	  	$('#restaurant').modal('show')
+	  </script>
+	  {% endif %}
+  
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="../static/vendor/scrollreveal/scrollreveal.min.js"></script>
