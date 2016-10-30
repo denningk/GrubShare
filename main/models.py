@@ -37,6 +37,7 @@ class Food_Bank(models.Model):
     user_name = models.CharField(max_length=200)
     pass_word = models.CharField(max_length=200)
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    state = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name

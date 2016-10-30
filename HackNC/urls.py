@@ -25,7 +25,5 @@ urlpatterns = [
     url(r'^registration/', include('registration.urls')),
     url(r'^restaurant/', include('restaurant.urls')),
     url(r'^food_bank/', include('food_bank.urls')),
-    url(r'^map/', mv.map),
-    #url('r^restaurant', include('restaurants.urls')),
-    #url(r'^foodbank/', include('foodbanks.urls')),
+    
 ]
