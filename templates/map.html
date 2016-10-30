@@ -95,25 +95,7 @@
         center: {{center}},
         zoom: 14
       });
-
-      // Adds a graphic when the user clicks the map. If 2 or more points exist, route is solved.
-      on(view, "click", addStop);
-
-      function addStop(event) {
-        // Add a point at the location of the map click
-        var stop = new Graphic({
-          geometry: event.mapPoint,
-          symbol: stopSymbol
-        });
-        routeLyr.add(stop);
-
-        // Execute the route task if 2 or more stops are input
-        routeParams.stops.features.push(stop);
-        if (routeParams.stops.features.length >= 2) {
-          routeTask.solve(routeParams).then(showRoute);
-        }
-      }
-      
+  
       function addRestaurants(coordinates){
       require(["esri/geometry/Point"], function(Point) {
     	  coordinates.forEach(p => {var stop = new Graphic({
