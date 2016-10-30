@@ -48,7 +48,7 @@ class Food_Bank_Pickup(models.Model):
         return str(self.date)
 
 class Restaurant_Donation(models.Model):
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=200)
     approx_servings = models.IntegerField(default=0)
     date = models.DateTimeField('donation date')
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)

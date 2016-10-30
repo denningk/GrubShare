@@ -10,7 +10,7 @@ def restaurant_donation(request):
         form = DonationForm(request.POST)
 
         if form.is_valid():
-            description = form.cleaned_data['donation_description']
+            description = form.cleaned_data['description']
             approx_servings = form.cleaned_data['approx_servings']
             date = datetime.now()
             restaurant_user_name = request.session['user_name']
@@ -21,7 +21,10 @@ def restaurant_donation(request):
                                             date = date,
                                             restaurant = restaurant)
             donation.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/restaurant/confirmation')
     else:
         form = DonationForm()
     return render(request, 'donation_form.html', {'form': form})
+
+def confirmation(request):
+    return render(request, "confirmation_page.html")
