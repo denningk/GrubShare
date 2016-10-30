@@ -86,7 +86,9 @@ def restuarant_donation(request):
         form = DonationForm(request.POST)
 
         if form.is_valid():
-            description = form.cleaned_data['donation_description']
+#             description = form.cleaned_data['donation_description']
+#             name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
             approx_servings = form.cleaned_data['approx_servings']
             date = datetime.now()
             restaurant_user_name = form.cleaned_data['username']

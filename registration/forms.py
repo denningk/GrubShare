@@ -38,10 +38,4 @@ class FoodBankForm(forms.Form):
     contact_number = forms.CharField(label="Phone Number",widget=forms.TextInput(attrs={'placeholder': 'Phone Number','class':'form-control', 'name':'contact_number'}),max_length=50)
     username = forms.CharField(label="Username",widget=forms.TextInput(attrs={'placeholder': 'Username','class':'form-control', 'name':'username'}),max_length=30,min_length=3,validators=[validators.validate_slug])
     password = forms.CharField(label="Password",max_length=50,min_length=6,
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password','class':'form-control', 'name':'password'}))
-    
-class DonationForm(forms.Form):
-    donation_description = forms.CharField(widget=forms.Textarea(attrs={'name':'donation_description'}))
-    approx_servings = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Approx Servings','class':'form-control','name':'approx_servings'}),max_length=50)
-    date = forms.DateField(label=u'Date of Donation', input_formats=['%d/%m/%Y', '%m/%d/%Y',], required=False, widget=forms.DateInput(format = '%d/%m/%Y'))
-    
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password','class':'form-control', 'name':'password'}))    
