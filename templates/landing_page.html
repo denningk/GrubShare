@@ -86,8 +86,9 @@
             <div class="alert alert-danger"> {{ food_error_msg }} </div>
             {% endif %}
             <form class="form-signin" method="POST" action="/food_bank_login/" style="width: 80%; margin: auto;">
+              {% csrf_token %}
                 <input type="text" name="user_name" class="form-control" placeholder="Username" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="pass_word" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Sign in</button>
                 <label class="checkbox pull-left" style="margin: 15px 0px;">
