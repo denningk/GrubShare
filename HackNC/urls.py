@@ -20,7 +20,11 @@ import main.views as mv, registration.views as rv
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', mv.landing_page),
+    url(r'^restaurant_login/', mv.restaurant_login_page),
+    url(r'^food_bank_login/', mv.food_bank_login_page),
     url(r'^registration/', include('registration.urls')),
+    url(r'^restaurant/', include('restaurant.urls')),
+    url(r'^food_bank/', include('food_bank.urls')),
     #url('r^restaurant', include('restaurants.urls')),
     #url(r'^foodbank/', include('foodbanks.urls')),
 ]

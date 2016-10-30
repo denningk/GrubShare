@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+</head>
+<body>
+<h>Register</h>
+<form method="POST" action="/registration/foodbank/register">
+{%csrf_token%}
+{{form}}
+
+<button type="submit" class="btn btn-success btn-block" id="register_button">
+	<span class="glyphicon glyphicon-ok"></span> Register
+</button>
+</form>
+
+</body>
+</html>
