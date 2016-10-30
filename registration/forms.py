@@ -26,7 +26,7 @@ class RestaurantRegistrationForm(forms.Form):
     
 class FoodBankForm(forms.Form):
        
-    name = forms.CharField(label="Name",widget=forms.TextInput(attrs={'placeholder': 'Namefoodbanks','class':'form-control', 'name':'name'}),max_length=200)
+    name = forms.CharField(label="Name",widget=forms.TextInput(attrs={'placeholder': 'Name','class':'form-control', 'name':'name'}),max_length=200)
     address_street=  forms.CharField(label="Street",widget=forms.TextInput(attrs={'placeholder': 'Street','class':'form-control','name':'address_street' }),max_length=200)
     address_city = forms.CharField(label="City",widget=forms.TextInput(attrs={'placeholder': 'City','class':'form-control', 'name':'address_city'}),max_length=200)
     address_state = forms.CharField(label="State",widget=forms.TextInput(attrs={'placeholder': 'State','class':'form-control', 'name':'address_state'}),max_length=20)
