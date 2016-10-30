@@ -20,8 +20,9 @@ def register_restaurant(request):
             last_name_contact = form.cleaned_data['contact_last_name']
             user_name = form.cleaned_data['username']
             pass_word = form.cleaned_data['password']
-            area = Area(city = city, zipcode = zipcode)
-            area.save()
+            if not Area.objects.all().filter(zipcode = zipcode).exists():
+                area = Area(city = city, zipcode = zipcode)
+                area.save()
             restaurant_registration = Restaurant(name = name,
                                                 street = street,
                                                 city = city,
@@ -73,24 +74,3 @@ def register_foodbank(request):
     else:
         form = FoodBankForm()
     return render(request, 'foodbank_form.html', {'form': form})
-
-def restuarant_donation(request):
-    if request.method == 'POST':
-        form = DonationForm(request.POST)
-
-        if form.is_valid():
-            description = form.cleaned_data['donation_description']
-            approx_servings = form.cleaned_data['approx_servings']
-            date = datetime.now()
-            restaurant_user_name = form.cleaned_data['username']
-            restaurant = Restaurant.objects.get(user_name=restaurant_user_name)
-
-            donation = Restaurant_Donation(description = description,
-                                            approx_servings = approx_servings,
-                                            date = date,
-                                            restaurant = restaurant)
-            donation.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = DonationForm()
-    return render(request, 'donation_form.html', {'form': form})
