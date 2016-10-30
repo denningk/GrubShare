@@ -19,7 +19,6 @@ def dashboard_map(request):
         data = gmaps.geocode(rest.street + ", " + rest.city + ", " + rest.state)
         
         locations.append(list(parse_location(data)))
-    print locations
 
     return render(request, "food_bank_dashboard.html", {'locations':locations})
 
