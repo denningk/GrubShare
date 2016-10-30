@@ -4,11 +4,6 @@ from django.http import HttpResponseRedirect
 from datetime import datetime
 from forms import *
 from datetime import datetime
-def restaurant_form(request):
-    return render(request, 'restaurant_registration_form.html')
-
-def foodBank_form(request):
-    return render(request,"foodbank_form.html")
 
 def register_restaurant(request):
     if request.method == 'POST':
@@ -61,7 +56,7 @@ def register_foodbank(request):
             user_name = form.cleaned_data['username']
             pass_word = form.cleaned_data['password']
             area = Area(city = city, zipcode = zipcode)
-
+            area.save()
             food_bank_registration = Food_Bank(name = name,
                                                 street = street,
                                                 city = city,
