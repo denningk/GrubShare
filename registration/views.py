@@ -2,7 +2,7 @@ from django.shortcuts import render
 from main.models import *
 from django.http import HttpResponseRedirect
 from datetime import datetime
-from forms import *
+from .forms import *
 from datetime import datetime
 
 def register_restaurant(request):
