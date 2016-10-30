@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', mv.landing_page),
     url(r'^registration/', include('registration.urls')),
+    url(r'^restaurant/', include('restaurant.urls')),
     #url('r^restaurant', include('restaurants.urls')),
     #url(r'^foodbank/', include('foodbanks.urls')),
 ]
