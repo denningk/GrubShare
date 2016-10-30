@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 def landing_page(request):
     return render(request, "landing_page.html")
 
+def map(request):
+    return render(request,"map.html", {"center":[-79.4414, 37.7858]})
+
 def restaurant_login_page(request):
     if request.method == 'POST':
         username = request.POST.get('user_name')

@@ -7,6 +7,5 @@ from django import forms
 from django.core import validators
 
 class DonationForm(forms.Form):
-
-    donation_description = forms.CharField(widget=forms.TextInput(attrs={'name':'donation_description'}), max_length=50)
-    approx_servings = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Approx Servings','class':'form-control','name':'approx_servings'}),max_length=50)
+    description = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Description of Donation','class':'form-control','name':'description'}),max_length=200)
+    approx_servings = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'How many people will this feed?','class':'form-control','name':'approx_servings'}),max_length=50)

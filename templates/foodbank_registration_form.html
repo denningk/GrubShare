@@ -2,10 +2,8 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Register</title>
-	<title>Restaurant Registration</title>
+	<title>Food Bank Registration</title>
 	<!-- Bootstrap Core CSS -->
-    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -23,13 +21,13 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h1 style="text-align: center;">
-					<span class="glyphicon glyphicon-pencil"></span> &nbsp; Registration for Restaurants
+					<span class="glyphicon glyphicon-pencil"></span> &nbsp; Registration for Food Banks
 				</h1>
 			</div>
 			<div class="modal-body">
-				<form method="POST" action="/registration/restaurant/register">
+				<form method="POST" action="/registration/foodbank/register">
 					{%csrf_token%}
-					{{form}}
+					{{form}}							
 					<div class="modal-footer">							
 						<button type="submit" class="btn btn-success btn-block" id="register_button">
 							<span class="glyphicon glyphicon-ok"></span> &nbsp; Register

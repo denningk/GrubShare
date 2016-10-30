@@ -4,6 +4,11 @@ from django.http import HttpResponseRedirect
 from datetime import datetime
 from .forms import *
 from datetime import datetime
+def restaurant_form(request):
+    return render(request, 'restaurant_registration_form.html')
+
+def foodBank_form(request):
+    return render(request,"foodbank_registration_form.html")
 
 def register_restaurant(request):
     if request.method == 'POST':
@@ -75,3 +80,27 @@ def register_foodbank(request):
     else:
         form = FoodBankForm()
     return render(request, 'foodbank_form.html', {'form': form})
+    return render(request, 'foodbank_registration_form.html', {'form': form})
+
+def restuarant_donation(request):
+    if request.method == 'POST':
+        form = DonationForm(request.POST)
+
+        if form.is_valid():
+#             description = form.cleaned_data['donation_description']
+#             name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            approx_servings = form.cleaned_data['approx_servings']
+            date = datetime.now()
+            restaurant_user_name = form.cleaned_data['username']
+            restaurant = Restaurant.objects.get(user_name=restaurant_user_name)
+
+            donation = Restaurant_Donation(description = description,
+                                            approx_servings = approx_servings,
+                                            date = date,
+                                            restaurant = restaurant)
+            donation.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = DonationForm()
+    return render(request, 'donation_form.html', {'form': form})

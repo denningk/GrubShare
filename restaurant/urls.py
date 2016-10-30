@@ -10,4 +10,5 @@ urlpatterns = [
 
                url(r'^donation/', rev.restaurant_donation),
                url(r'^donation/submit', rev.restaurant_donation),
+               url(r'^confirmation/', rev.confirmation),
                ]
