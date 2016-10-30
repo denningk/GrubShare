@@ -19,10 +19,30 @@ def dashboard_map(request):
     fb_location = gmaps.geocode(current_food_bank.street+ ", " + current_food_bank.city + ", " + current_food_bank.state)
     center = parse_location(fb_location)
     for rest in donating_rests:
-        data = gmaps.geocode(rest.street + ", " + rest.city + ", " + rest.state)        
+        data = gmaps.geocode(rest.street + ", " + rest.city + ", " + rest.state)
         locations.append(list(parse_location(data)))
-    return render(request, "map.html", {'locations':locations,'center':list(center)})
+    numRest = len(locations)
+    restDict = []
+    restNames = []
+    currRest = Restaurant_Donation.objects.filter(date = datetime.date.today())
+    
+    i = 0
+    j = 0
+    
+    for rest in currRest:
+        
+        restDict.append([rest.approx_servings, rest.description])
+        
+        i += 1
+    
+    for restName in donating_rests:
+        restNames.append(restName.name)
+        
+    while j < i:
+        restDict[j].append(restNames[j])
+        j += 1
+    
+    return render(request, "map.html", {'locations':locations,'center':list(center),'numRest': numRest, 'restDict': restDict, 'restNames': restNames})
 
-
-def map(request):
-    return render(request,"map.html", {"center":[-79.4414, 37.7858]})
+def dashboard(request):
+    return render(request, "food_bank_dashboard.html")
