@@ -7,5 +7,5 @@ from django.conf.urls import url
 import food_bank.views as fbv
 
 urlpatterns = [
-               url(r'^dashboard/', fbv.dashboard),
+               url(r'^dashboard/', fbv.dashboard_map),
                ]

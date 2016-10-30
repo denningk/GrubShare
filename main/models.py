@@ -20,6 +20,7 @@ class Restaurant(models.Model):
     user_name = models.CharField(max_length=200)
     pass_word = models.CharField(max_length=200)
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    state = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
@@ -50,7 +51,7 @@ class Food_Bank_Pickup(models.Model):
 class Restaurant_Donation(models.Model):
     description = models.CharField(max_length=1000)
     approx_servings = models.IntegerField(default=0)
-    date = models.DateTimeField('donation date')
+    date = models.DateField('donation date')
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     food_bank_pickup = models.ForeignKey(Food_Bank_Pickup, on_delete=models.CASCADE, blank=True, null=True)
 

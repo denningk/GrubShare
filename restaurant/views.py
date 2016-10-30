@@ -12,7 +12,7 @@ def restaurant_donation(request):
         if form.is_valid():
             description = form.cleaned_data['donation_description']
             approx_servings = form.cleaned_data['approx_servings']
-            date = datetime.now()
+            date = datetime.date.today()
             restaurant_user_name = request.session['user_name']
             restaurant = Restaurant.objects.get(user_name=restaurant_user_name)
 
