@@ -17,10 +17,13 @@ def dashboard_map(request):
     locations = []
     for rest in donating_rests:
         data = gmaps.geocode(rest.street + ", " + rest.city + ", " + rest.state)
-        
+
         locations.append(list(parse_location(data)))
 
-    return render(request, "food_bank_dashboard.html", {'locations':locations})
+        numRest = len(locations)
+
+    return render(request, "food_bank_dashboard.html", {'locations':locations,
+                                                        'numRest': numRest})
 
 def dashboard(request):
     return render(request, "food_bank_dashboard.html")
