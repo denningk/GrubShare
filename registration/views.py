@@ -56,8 +56,9 @@ def register_foodbank(request):
             last_name_contact = form.cleaned_data['contact_last_name']
             user_name = form.cleaned_data['username']
             pass_word = form.cleaned_data['password']
-            area = Area(city = city, zipcode = zipcode)
-            area.save()
+            if not Area.objects.all().filter(zipcode = zipcode).exists():
+                area = Area(city = city, zipcode = zipcode)
+                area.save()
             food_bank_registration = Food_Bank(name = name,
                                                 street = street,
                                                 city = city,
