@@ -7,10 +7,22 @@ def landing_page(request):
 
 def restaurant_login_page(request):
     if request.method == 'POST':
-        user_name = request.POST.get('user_name')
-        pass_word = request.POST.get('user_name')
-        if Restaurant.objects.get(user_name = user_name).pass_word == pass_word:
-            request.session['user_name'] = user_name
+        username = request.POST.get('user_name')
+        pass_word = request.POST.get('pass_word')
+        try:
+            Restaurant.objects.get(user_name = username, pass_word = pass_word)
+            request.session['user_name'] = username
             return HttpResponseRedirect('/restaurant/donation')
-        else:
-            return HttpResponseRedirect('/')
+        except:
+            return render(request, "landing_page.html", {'rest_error_msg': "Wrong username or password. Please try again."})
+
+def food_bank_login_page(request):
+    if request.method == 'POST':
+        username = request.POST.get('user_name')
+        pass_word = request.POST.get('pass_word')
+        try:
+            Food_Bank.objects.get(user_name = username, pass_word = pass_word)
+            request.session['user_name'] = username
+            return HttpResponseRedirect('/food_bank/dashboard')
+        except:
+            return render(request, "landing_page.html", {'food_error_msg': "Wrong username or password. Please try again."})
