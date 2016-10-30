@@ -97,8 +97,8 @@
       });
 
       // Adds a graphic when the user clicks the map. If 2 or more points exist, route is solved.
-      on(view, "click", addStop);
-
+      //on(view, "click", addStop);
+/*
       function addStop(event) {
         // Add a point at the location of the map click
         var stop = new Graphic({
@@ -113,7 +113,7 @@
           routeTask.solve(routeParams).then(showRoute);
         }
       }
-      
+ */     
       function addRestaurants(coordinates){
       require(["esri/geometry/Point"], function(Point) {
     	  coordinates.forEach(p => {var stop = new Graphic({
