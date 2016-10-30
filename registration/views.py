@@ -8,7 +8,7 @@ def restaurant_form(request):
     return render(request, 'restaurant_registration_form.html')
 
 def foodBank_form(request):
-    return render(request,"foodbank_form.html")
+    return render(request,"foodbank_registration_form.html")
 
 def register_restaurant(request):
     if request.method == 'POST':
@@ -77,7 +77,7 @@ def register_foodbank(request):
             return HttpResponseRedirect('/')
     else:
         form = FoodBankForm()
-    return render(request, 'foodbank_form.html', {'form': form})
+    return render(request, 'foodbank_registration_form.html', {'form': form})
 
 def restuarant_donation(request):
     if request.method == 'POST':
